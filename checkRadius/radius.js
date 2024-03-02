@@ -29,6 +29,7 @@ btn.addEventListener("click", (e) => {
     document.querySelector("#message").innerHTML =
       "Enter a valid bottom right radius";
   } else {
+    document.querySelector("#message").innerHTML = "";
     document.querySelector("#box").style.height = height.value + "px";
     document.querySelector("#box").style.width = width.value + "px";
     if (radius.value !== "0") {
