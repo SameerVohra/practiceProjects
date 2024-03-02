@@ -1,0 +1,44 @@
+body {
+  background-color: black;
+}
+
+#container {
+  display: flex;
+  justify-self: center;
+  justify-content: center;
+  align-content: center;
+}
+
+#projects {
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.links {
+  border: 5px solid white;
+  padding: 20px;
+  text-align: center;
+  transition: 500ms ease-in-out;
+  margin-top: 10px;
+}
+
+.links a {
+  text-decoration: none;
+  color: white;
+}
+
+.links a:hover {
+  color: black;
+}
+
+.links:hover {
+  box-shadow: 10px 5px 10px white;
+  background-color: wheat;
+  border-radius: 20px;
+  padding: 35px;
+  font-size: 30px;
+}

@@ -1,0 +1,28 @@
+body {
+  background-color: black;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#container {
+  display: flex;
+  align-items: center;
+  justify-self: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+#box {
+  border: 3px solid white;
+  background-color: wheat;
+}
+
+form {
+  text-align: center;
+}
+
+form input {
+  text-align: center;
+}
