@@ -1,0 +1,47 @@
+body {
+  background-color: black;
+  color: white;
+}
+
+#container {
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+form {
+  text-align: center;
+}
+
+#genPass {
+  color: wheat;
+  font-size: 20px;
+}
+
+#error {
+  font-size: 30px;
+  color: red;
+}
+
+#head {
+  color: white;
+  font-size: 20px;
+  width: auto;
+}
+
+#btn {
+  padding: 20px;
+  background-color: grey;
+  color: white;
+  transition: 500ms ease-in;
+  cursor: pointer;
+  border: 5px solid sandybrown;
+}
+
+#btn:hover {
+  box-shadow: 10px 10px 10px white;
+  background-image: linear-gradient(45deg, white, wheat, grey);
+  color: black;
+}
