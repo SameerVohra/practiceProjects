@@ -18,15 +18,18 @@ function InputBox({
   const strId = useId();
   return (
     <>
-      <div className="bg-black p-5 rounded-2xl flex">
-        <div className="w-1/2">
-          <label htmlFor={strId} className="text-white inline-block">
+      <div className="bg-black p-5 rounded-2xl flex flex-col ">
+        <div className="bg-black p-5 rounded-2xl flex flex-col justify-center items-center">
+          <label
+            htmlFor={strId}
+            className="text-white inline-block text-center mb-2 font-bold text-2xl"
+          >
             {label}
           </label>
           <input
             id={strId}
             type="text"
-            className="outline-none bg-yellow-50 p-2 text-black"
+            className="outline-none bg-yellow-50 p-2 text-black text-center"
             placeholder={placeholder}
             value={text}
             disabled={isEnabled}

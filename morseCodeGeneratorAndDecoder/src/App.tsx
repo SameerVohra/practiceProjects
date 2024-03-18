@@ -1,25 +1,33 @@
 import { useRef, useState, useEffect } from "react";
 import { InputBox } from "./components";
+
 function App() {
   const [text, setText] = useState("");
   const [from, setFrom] = useState("English");
   const [to, setTo] = useState("Morse");
   const [convertedText, setConvertedText] = useState("");
   const [error, setError] = useState("");
-
+  const [copied, setCopied] = useState(false);
   const passRef = useRef<HTMLInputElement>(null);
 
-  const copyToClipboard = useEffect(() => {
-    passRef.current?.select();
-    window.navigator.clipboard.writeText(convertedText);
+  useEffect(() => {
+    const copyToClipboard = () => {
+      if (copied) {
+        passRef.current?.select();
+        window.navigator.clipboard.writeText(convertedText);
+      }
+      setCopied(false);
+    };
+
+    copyToClipboard();
   }, [convertedText]);
 
   const ToMorse = (text: string) => {
     fetch(`https://api.funtranslations.com/translate/morse.json?text=${text}`)
       .then((res) => res.json())
       .then((res) => {
-        if (res.contents.translated === "") setError("Error");
-        setConvertedText(res.contents.translated);
+        if (res.contents.translated === "") setError("INVALID TEXT");
+        else setConvertedText(res.contents.translated);
       })
       .catch((error) => setError(error));
   };
@@ -30,12 +38,14 @@ function App() {
     )
       .then((res) => res.json())
       .then((res) => {
-        setConvertedText(res.contents.translated);
+        if (res.contents.translated === "") setError("INVALID MORSE CODE");
+        else setConvertedText(res.contents.translated);
       })
       .catch((error) => setError(error));
   };
+
   const convert = (text: string) => {
-    if (from == "English" && to == "Morse") {
+    if (from === "English" && to === "Morse") {
       console.log("from english to morse");
       ToMorse(text);
     } else {
@@ -53,9 +63,9 @@ function App() {
         }}
       >
         <div className="w-full flex justify-center align-middle">
-          <div className="w-full max-w-md bg-gray-500 rounded-2xl">
+          <div className="w-full max-w-md bg-gray-500 rounded-2xl ">
             <form
-              className="p-8"
+              className="p-8 items-center"
               onSubmit={(e) => {
                 e.preventDefault();
               }}
@@ -67,7 +77,7 @@ function App() {
                   setText(e);
                   console.log(text);
                 }}
-                placeholder="Enter"
+                placeholder="Enter text"
               />
               <div className="relative w-full h-0.5">
                 <button
@@ -93,27 +103,20 @@ function App() {
                 placeholder=""
                 ref={passRef}
               />
-              <div className="relative flex justify-between items-center w-full">
-                <button
-                  className="rounded-2xl bg-blue-600 text-white px-2 py-3 absolute"
-                  onClick={() => {
-                    copyToClipboard;
-                    console.log("copied");
-                  }}
-                >
-                  COPY
-                </button>
-              </div>
+              <div className="relative flex justify-between items-center w-full"></div>
               <button
                 type="submit"
                 className="w-full bg-blue-600 text-white px-4 py-3 rounded-lg mt-3"
                 onClick={() => {
                   convert(text);
+                  setCopied(true);
                 }}
               >
-                Convert {from.toUpperCase()} to {to.toUpperCase()}
+                Convert {from.toUpperCase()} to {to.toUpperCase()} and COPY
               </button>
-              {error}
+              <div className="text-red-700 text-center text-2xl font-bold mt-2">
+                {error}
+              </div>
             </form>
           </div>
         </div>
