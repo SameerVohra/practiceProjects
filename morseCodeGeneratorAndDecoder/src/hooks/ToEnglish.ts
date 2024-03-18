@@ -1,20 +1,14 @@
 import { useEffect, useState } from "react";
 
-interface EnglishData {
-  contents: {
-    translated: string;
-  };
-}
-
 function ToEnglish(morse: string) {
-  const [data, setData] = useState<EnglishData | null>(null);
+  const [data, setData] = useState("");
   useEffect(() => {
     fetch(
       `https://api.funtranslations.com/translate/morse2english.json?text=${morse}`,
     )
       .then((res) => res.json())
-      .then((res: EnglishData) => {
-        setData(res);
+      .then((res) => {
+        setData(res.contents.translated);
       });
   }, [morse]);
 

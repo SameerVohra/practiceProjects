@@ -5,6 +5,7 @@ interface InputBoxProps {
   isEnabled?: boolean;
   onTextChange: (text: string) => void;
   text: string;
+  placeholder: string;
 }
 
 function InputBox({
@@ -12,6 +13,7 @@ function InputBox({
   isEnabled = false,
   onTextChange,
   text,
+  placeholder,
 }: InputBoxProps) {
   const strId = useId();
   return (
@@ -25,7 +27,7 @@ function InputBox({
             id={strId}
             type="text"
             className="outline-none bg-yellow-50 p-2 text-black"
-            placeholder="Enter text here"
+            placeholder={placeholder}
             value={text}
             disabled={isEnabled}
             onChange={(e) => {
